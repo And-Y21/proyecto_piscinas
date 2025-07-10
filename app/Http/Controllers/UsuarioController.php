@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
     public function index(){
+        Log::channel('info')->info('Usuario accedió a la sección de usuarios', [
+            'user_id' => Auth::id(),
+            'rol' => Auth::user()->rol
+        ]);
+
         $usuario = new User();
         $roles = ['Cliente','Instructor','Admin'];
 
@@ -15,6 +22,11 @@ class UsuarioController extends Controller
     }
 
     public function list(){
+        Log::channel('info')->info('Usuario accedió a la lista de usuarios', [
+            'user_id' => Auth::id(),
+            'rol' => Auth::user()->rol
+        ]);
+
         $usuarios = User::all();
 
         return view("usuarios.lista", compact('usuarios'));
@@ -22,6 +34,11 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+        Log::channel('info')->info('Usuario guardó un usuario', [
+            'user_id' => Auth::id(),
+            'rol' => Auth::user()->rol,
+        ]);
+
         if ($request->id == null) {
             $usuario = new User();
             if ($request->filled('contrasena')) {
@@ -47,6 +64,11 @@ class UsuarioController extends Controller
     }
 
     public function edit($id){
+        Log::channel('info')->info('Usuario accedió a la edición de un usuario', [
+            'user_id' => Auth::id(),
+            'rol' => Auth::user()->rol,
+            'usuario_id' => $id
+        ]);
         $usuario = User::find($id);
         $roles = ['Cliente','Instructor','Admin'];
 
@@ -54,6 +76,12 @@ class UsuarioController extends Controller
     }
 
     public function destroy($id){
+        Log::channel('warning')->warning('Usuario eliminó un usuario', [
+            'user_id' => Auth::id(),
+            'rol' => Auth::user()->rol,
+            'usuario_id' => $id
+        ]);
+
         $usuario = User::find($id);
         $usuario->delete();
         return redirect()->to('usuarios');

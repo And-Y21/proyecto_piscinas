@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Clase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ClaseController extends Controller
 {
     public function index(){
+        $user = Auth::user();
+        Log::channel('info')->info('Usuario accedió a la sección de clases', [
+            'user_id' => $user->id,
+            'rol' => $user->rol
+        ]);
         $usuarios = User::all();
         $clase = new Clase();
 
@@ -15,6 +22,11 @@ class ClaseController extends Controller
     }
 
     public function list(){
+        $user = Auth::user();
+        Log::channel('info')->info('Usuario accedió a la lista de clases', [
+            'user_id' => $user->id,
+            'rol' => $user->rol
+        ]);
         $clases = Clase::join('users','clases.id_profesor','=', 'users.id')
             ->select('clases.*', 'users.name as instructor')
             ->get();
@@ -23,6 +35,20 @@ class ClaseController extends Controller
     }
 
     public function store(Request $request){
+        $user = Auth::user();
+        Log::channel('info')->info('Usuario guardó una clase', [
+            'user_id' => $user->id,
+            'rol' => $user->rol,
+            'clase_data' => $request->all()
+        ]);
+        
+        $request->validate([
+            'fecha' => 'required|date',
+            'id_usuario' => 'required|exists:users,id',
+            'tipo' => 'required|string|max:255',
+            'lugares' => 'required|integer|min:1',
+        ]);
+
         if($request->id == 0){
             $clase = new Clase();
         }else{
@@ -41,6 +67,13 @@ class ClaseController extends Controller
     }
 
     public function edit($id){
+        $user = Auth::user();
+        Log::channel('info')->info('Usuario accedió a editar una clase', [
+            'user_id' => $user->id,
+            'rol' => $user->rol,
+            'clase_id' => $id
+        ]);
+
         $usuarios = User::all();
         $clase = Clase::find($id);
 
@@ -48,6 +81,13 @@ class ClaseController extends Controller
     }
 
     public function destroy($id){
+        $user = Auth::user();
+        Log::channel('warning')->warning('Usuario eliminó una clase', [
+            'user_id' => $user->id,
+            'rol' => $user->rol,
+            'clase_id' => $id
+        ]);
+
         $clase = Clase::find($id);
         $clase->delete();
         return redirect()->to('clases');
