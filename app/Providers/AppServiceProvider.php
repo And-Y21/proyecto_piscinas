@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Middleware\VerificaRol;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,14 @@ class AppServiceProvider extends ServiceProvider
             return $user->rol === 'Instructor';
         });
 
+        Gate::define('viewLogViewer', function ($user) {
+            return $user->rol === 'Admin';
+        });
+
         Route::aliasMiddleware('rol', VerificaRol::class);
+
+        if (env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
