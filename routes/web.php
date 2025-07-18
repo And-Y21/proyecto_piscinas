@@ -15,9 +15,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('log-viewer', function () {
-    return LogViewer::index();
-})->name('log-viewer')->middleware('auth', 'rol:Admin');
+Route::middleware(['auth', 'rol:Admin'])->group(function () {
+    Route::get('/log-viewer', function () {
+        return redirect('/log-viewer');
+    })->name('log-viewer');
+});
 
 Route::get('membresias', [MembresiaController::class, 'list'])
     ->name('membresias',)
