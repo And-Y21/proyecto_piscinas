@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function canViewLogViewer(): bool
+    {
+        return $this->hasPermission('viewLogViewer'); // o cualquier lógica que uses
+    }
 }

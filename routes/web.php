@@ -4,6 +4,8 @@ use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ClaseController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Opcodes\LogViewer\Facades\LogViewer;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +14,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'rol:Admin'])->group(function () {
+    Route::get('/log-viewer', function () {
+        return redirect('/log-viewer');
+    })->name('log-viewer');
+});
 
 Route::get('membresias', [MembresiaController::class, 'list'])
     ->name('membresias',)
