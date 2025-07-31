@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pagos', function (Blueprint $table) {
+        Schema::create('tipos_membresia', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_usuario');
-            $table->unsignedBigInteger('id_membresia')->nullable();
-            $table->unsignedBigInteger('id_clase')->nullable();
-            $table->decimal('monto');
-            $table->date('fecha');
+            $table->string('nombre');
+            $table->integer('clases_adquiridas');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pagos');
+        Schema::dropIfExists('tipos_membresia');
     }
 };
