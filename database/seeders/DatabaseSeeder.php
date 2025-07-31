@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UsersTableSeeder::class,
+            TipoMembresiaSeeder::class,
             MembresiasTableSeeder::class,
             ClasesTableSeeder::class,
             AsistenciasTableSeeder::class,

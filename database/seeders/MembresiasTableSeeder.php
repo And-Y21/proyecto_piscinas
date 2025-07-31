@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Membresia;
+use App\Models\TipoMembresia;
 
 class MembresiasTableSeeder extends Seeder
 {
@@ -14,14 +15,17 @@ class MembresiasTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $usuarios = User::inRandomOrder()->take(10)->wherenot('rol', 'Admin')->get();
+        $tipos = TipoMembresia::all();
+        $usuarios = User::where('rol', 'Cliente')->get();
 
         foreach ($usuarios as $usuario) {
+            $tipo = $tipos->random();
+
             Membresia::create([
                 'id_usuario' => $usuario->id,
-                'clases_adquiridas' => 20,
-                'clases_disponibles' => rand(5, 15),
-                'clases_ocupadas' => rand(5, 15)
+                'id_tipo_membresia' => $tipo->id,
+                'clases_disponibles' => $tipo->clases_adquiridas,
+                'clases_ocupadas' => 0,
             ]);
         }
     }
