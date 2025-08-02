@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tipos_membresia', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->decimal('precio', 8, 2);
             $table->integer('clases_adquiridas');
             $table->timestamps();
         });

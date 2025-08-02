@@ -11,9 +11,9 @@ class TipoMembresiaSeeder extends Seeder
     public function run()
     {
         TipoMembresia::insert([
-            ['nombre' => 'Básica', 'clases_adquiridas' => 5],
-            ['nombre' => 'Estándar', 'clases_adquiridas' => 10],
-            ['nombre' => 'Premium', 'clases_adquiridas' => 20],
+            ['nombre' => 'Básica', 'clases_adquiridas' => 5, 'precio' => 19.99],
+            ['nombre' => 'Estándar', 'clases_adquiridas' => 10, 'precio' => 29.99],
+            ['nombre' => 'Premium', 'clases_adquiridas' => 20, 'precio' => 39.99],
         ]);
     }
 }
