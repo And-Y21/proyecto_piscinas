@@ -19,7 +19,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Usuario</th>
-                                <th>Clases Adquiridas</th>
                                 <th>Clases Disponibles</th>
                                 <th>Clases Ocupadas</th>
                                 <th>Acciones</th>
@@ -30,7 +29,6 @@
                             <tr>
                                 <td>{{$membresia->id}}</td>
                                 <td>{{$membresia->cliente}}</td>
-                                <td>{{$membresia->clases_adquiridas}}</td>
                                 <td>{{$membresia->clases_disponibles}}</td>
                                 <td>{{$membresia->clases_ocupadas}}</td>
                                 <td>

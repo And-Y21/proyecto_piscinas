@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Membresia;
 use App\Models\User;
+use App\Models\TipoMembresia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -16,10 +17,11 @@ class MembresiaController extends Controller
             'rol' => $user->rol
         ]);
 
-        $usuarios = User::all();
+        $usuarios = User::where('rol', 'Cliente')->get();
+        $tipos_membresia = TipoMembresia::all();
         $membresia = new Membresia();
 
-        return view("membresias.nueva", compact('usuarios', 'membresia'));
+        return view("membresias.nueva", compact('usuarios', 'tipos_membresia', 'membresia'));
     }
 
     public function list(){
@@ -48,9 +50,10 @@ class MembresiaController extends Controller
         }else{
             $membresia = Membresia::find($request->id);
         }
+        $membresia->id_tipo_membresia = $request->id_tipo_membresia;
+        $clases_adquiridas = TipoMembresia::find($request->id_tipo_membresia)->clases_adquiridas;
         $membresia->id_usuario = $request->id_usuario;
-        $membresia->clases_adquiridas = $request->clases_adquiridas;
-        $membresia->clases_disponibles = $request->clases_adquiridas;
+        $membresia->clases_disponibles = $clases_adquiridas;
         $membresia->clases_ocupadas = 0;
 
         $membresia->save();
@@ -65,10 +68,11 @@ class MembresiaController extends Controller
             'rol' => $user->rol
         ]);
 
-        $usuarios = User::all();
+        $usuarios = User::where('rol', 'Cliente')->get();
         $membresia = Membresia::find($id);
+        $tipos_membresia = TipoMembresia::all();
 
-        return view("membresias.nueva", compact('usuarios', 'membresia'));
+        return view("membresias.nueva", compact('usuarios', 'tipos_membresia', 'membresia'));
     }
 
     public function destroy($id){
