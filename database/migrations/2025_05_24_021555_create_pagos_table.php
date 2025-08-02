@@ -19,6 +19,10 @@ return new class extends Migration
             $table->decimal('monto');
             $table->date('fecha');
             $table->timestamps();
+
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_membresia')->references('id')->on('membresias')->onDelete('cascade');
+            $table->foreign('id_clase')->references('id')->on('clases')->onDelete('cascade');
         });
     }
 

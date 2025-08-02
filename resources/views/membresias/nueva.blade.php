@@ -26,13 +26,18 @@
                                         >{{$usuario->name}}</option>
                                 @endforeach
                             </select>
-                            <label for="clases_adquiridas">Clases adquiridas</label>
-                            <input type="number" class="form-control" name="clases_adquiridas" id="clases_adquiridas" value="{{$membresia->clases_adquiridas}}"
-                                placeholder="Ingrese la cantidad de clases adquiridas">
+                            <label for="tipo_membresia">Membresia</label>
+                            <select class="form-control" name="id_tipo_membresia" id="id_tipo_membresia">
+                                @foreach ($tipos_membresia as $tipo)
+                                    <option value="{{$tipo->id}}"
+                                        {{$membresia->id_tipo_membresia == $tipo->id ? 'selected' : ""}}
+                                        >{{$tipo->nombre}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Crear</button>
+                        <button type="submit" class="btn btn-success">Confirmar</button>
                         <a href="" class="btn btn-secondary">Cancelar</a>
                     </div>
                 </form>
