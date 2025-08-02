@@ -3,6 +3,7 @@
 use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ClaseController;
+use App\Http\Controllers\TipoMembresiaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -67,4 +68,20 @@ Route::get('clase/editar/{id}', [ClaseController::class, 'edit'])
     ->middleware('auth', 'rol:Admin');
 Route::delete('clase/eliminar/{id}', [ClaseController::class, 'destroy'])
     ->name('clase.eliminar')
+    ->middleware('auth', 'rol:Admin');
+
+Route::get('tipos_membresias', [TipoMembresiaController::class, 'list'])
+    ->name('tipos_membresias')
+    ->middleware('auth', 'rol:Admin');
+Route::get('tipo_membresia/nueva', [TipoMembresiaController::class, 'index'])
+    ->name('tipo_membresia.nueva')
+    ->middleware('auth', 'rol:Admin');
+Route::post('tipo_membresia/guardar', [TipoMembresiaController::class, 'store'])
+    ->name('tipo_membresia.guardar')
+    ->middleware('auth', 'rol:Admin');
+Route::get('tipo_membresia/editar/{id}', [TipoMembresiaController::class, 'edit'])
+    ->name('tipo_membresia.editar')
+    ->middleware('auth', 'rol:Admin');
+Route::delete('tipo_membresia/eliminar/{id}', [TipoMembresiaController::class, 'destroy'])
+    ->name('tipo_membresia.eliminar')
     ->middleware('auth', 'rol:Admin');

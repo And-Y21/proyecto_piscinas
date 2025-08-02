@@ -316,12 +316,22 @@ return [
             'icon' => 'fa fa-id-card',
             'submenu' => [
                 [
-                    'text' => 'Lista',
+                    'text' => 'Lista de membresias',
+                    'route' => 'tipos_membresias',
+                    'can' => 'admin',
+                ],
+                [
+                    'text' => 'Nuevo tipo de membresia',
+                    'route' => 'tipo_membresia.nueva', // 👈 Este debe coincidir con el definido en Route::name()
+                    'can' => 'admin',
+                ],
+                [
+                    'text' => 'Membresias de usuarios',
                     'route' => 'membresias',
                     'can' => 'admin',
                 ],
                 [
-                    'text' => 'Nueva',
+                    'text' => 'Asignar membresia',
                     'route' => 'membresia.nueva',
                     'can' => 'admin',
                 ],
