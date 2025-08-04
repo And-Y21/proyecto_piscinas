@@ -322,7 +322,7 @@ return [
                 ],
                 [
                     'text' => 'Nuevo tipo de membresia',
-                    'route' => 'tipo_membresia.nueva', // 👈 Este debe coincidir con el definido en Route::name()
+                    'route' => 'tipo_membresia.nueva',
                     'can' => 'admin',
                 ],
                 [
@@ -367,6 +367,23 @@ return [
                 [
                     'text' => 'Nuevo',
                     'route' => 'clase.nueva',
+                    'can' => 'admin',
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Asistencias',
+            'icon' => 'fa fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Lista',
+                    'route' => 'asistencias',
+                    'can' => 'admin',
+                ],
+                [
+                    'text' => 'Nuevo',
+                    'route' => 'asistencia.nueva',
                     'can' => 'admin',
                 ],
             ],
