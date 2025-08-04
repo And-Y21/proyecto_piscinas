@@ -4,6 +4,7 @@ use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\TipoMembresiaController;
+use App\Http\Controllers\AsistenciaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -85,6 +86,24 @@ Route::get('tipo_membresia/editar/{id}', [TipoMembresiaController::class, 'edit'
 Route::delete('tipo_membresia/eliminar/{id}', [TipoMembresiaController::class, 'destroy'])
     ->name('tipo_membresia.eliminar')
     ->middleware('auth', 'rol:Admin');
+
+Route::get('asistencias', [AsistenciaController::class, 'list'])
+    ->name('asistencias')
+    ->middleware('auth', 'rol:Admin');
+Route::get('asistencia/nueva', [AsistenciaController::class, 'index'])
+    ->name('asistencia.nueva')
+    ->middleware('auth', 'rol:Admin');
+Route::post('asistencia/guardar', [AsistenciaController::class, 'store'])
+    ->name('asistencia.guardar')
+    ->middleware('auth', 'rol:Admin');
+Route::get('asistencia/editar/{id}', [AsistenciaController::class, 'edit'])
+    ->name('asistencia.editar')
+    ->middleware('auth', 'rol:Admin');
+Route::delete('asistencia/eliminar/{id}', [AsistenciaController::class, 'destroy'])
+    ->name('asistencia.eliminar')
+    ->middleware('auth', 'rol:Admin');
+Route::get('/clase/{id}/profesor', [AsistenciaController::class, 'obtenerProfesor']);
+Route::get('/usuario/{id}/membresias', [AsistenciaController::class, 'obtenerMembresias']);
 
 Route::get('/auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
