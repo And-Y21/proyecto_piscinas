@@ -5,6 +5,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\TipoMembresiaController;
 use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\PagoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -110,6 +111,18 @@ Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController:
 Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('pagos', [PagoController::class, 'list'])
+    ->name('pagos')
+    ->middleware('auth', 'rol:Admin');
+Route::get('pago/nueva', [PagoController::class, 'index'])
+    ->name('pago.nueva')
+    ->middleware('auth', 'rol:Admin');
+Route::post('pago/guardar', [PagoController::class, 'store'])
+    ->name('pago.guardar')
+    ->middleware('auth', 'rol:Admin');
+Route::get('pago/editar/{id}', [PagoController::class, 'edit'])
+    ->name('pago.editar')
+    ->middleware('auth', 'rol:Admin');
+Route::delete('pago/eliminar/{id}', [PagoController::class, 'destroy'])
+    ->name('pago.eliminar')
+    ->middleware('auth', 'rol:Admin');

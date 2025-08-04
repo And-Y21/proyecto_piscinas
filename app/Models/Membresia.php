@@ -11,7 +11,7 @@ class Membresia extends Model
         return $this->belongsTo(TipoMembresia::class, 'id_tipo_membresia');
     }
     public function usuario()
-{
-    return $this->belongsTo(User::class, 'id_usuario');
-}
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 }
