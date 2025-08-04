@@ -85,3 +85,12 @@ Route::get('tipo_membresia/editar/{id}', [TipoMembresiaController::class, 'edit'
 Route::delete('tipo_membresia/eliminar/{id}', [TipoMembresiaController::class, 'destroy'])
     ->name('tipo_membresia.eliminar')
     ->middleware('auth', 'rol:Admin');
+
+Route::get('/auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
+Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
