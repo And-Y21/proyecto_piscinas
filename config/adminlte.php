@@ -390,6 +390,23 @@ return [
         ],
 
         [
+            'text' => 'Pagos',
+            'icon' => 'fa fa-credit-card',
+            'submenu' => [
+                [
+                    'text' => 'Lista de pagos',
+                    'route' => 'pagos',
+                    'can' => 'admin',
+                ],
+                [
+                    'text' => 'Nuevo pago',
+                    'route' => 'pago.nueva',
+                    'can' => 'admin',
+                ],
+            ],
+        ],
+
+        [
             'text' => 'Logs',
             'icon' => 'fas fa-file-alt',
             'route' => 'log-viewer',
