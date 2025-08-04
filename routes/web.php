@@ -105,3 +105,11 @@ Route::delete('asistencia/eliminar/{id}', [AsistenciaController::class, 'destroy
 Route::get('/clase/{id}/profesor', [AsistenciaController::class, 'obtenerProfesor']);
 Route::get('/usuario/{id}/membresias', [AsistenciaController::class, 'obtenerMembresias']);
 
+Route::get('/auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
+Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
