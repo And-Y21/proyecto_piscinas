@@ -34,6 +34,16 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|string',
+            'correo' => 'required|string|email',
+            'contrasena' => 'required|string|min:8',
+            'rol' => 'required|in:Cliente,Instructor,Admin',
+        ], [
+            'correo.email' => 'El correo debe ser una dirección válida.',
+            'contrasena.min' => 'La contraseña debe tener al menos 8 caracteres.',
+        ]);
+
         Log::channel('info')->info('Usuario guardó un usuario', [
             'user_id' => Auth::id(),
             'rol' => Auth::user()->rol,

@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label for="fecha">Fecha</label>
                             <input type="date" class="form-control" name="fecha" id="fecha" value="{{$clase->fecha}}"
-                                placeholder="Ingrese la fecha de clase">
+                                placeholder="Ingrese la fecha de clase" required>  
                             <label for="usuario">Instructor</label>
                             <select class="form-control" name="id_usuario" id="id_usuario">
                                 @foreach ($usuarios as $usuario)
@@ -31,10 +31,10 @@
                             </select>
                             <label for="tipo">Tipo</label>
                             <input type="text" class="form-control" name="tipo" id="tipo" value="{{$clase->tipo}}"
-                                placeholder="Ingrese el tipo de clase">
+                                placeholder="Ingrese el tipo de clase" required>
                             <label for="lugares">Lugares</label>
                             <input type="number" class="form-control" name="lugares" id="lugares" value="{{$clase->lugares}}"
-                                placeholder="Ingrese la cantidad de lugares">
+                                placeholder="Ingrese la cantidad de lugares" required>
                         </div>
                     </div>
                     <div class="card-footer">

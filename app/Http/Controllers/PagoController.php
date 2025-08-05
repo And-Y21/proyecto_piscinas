@@ -39,6 +39,14 @@ class PagoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'fecha' => 'required|date',
+            'id_usuario' => 'required|exists:usuario,id',
+            'id_membresia' => 'required|exists:membresia,id',
+            'id_clase' => 'required|exists:clase,id',
+            'monto' => 'required|numeric',
+        ]);
+
         Log::channel('info')->info('Usuario guardó un pago', [
             'user_id' => Auth::id(),
             'rol' => Auth::user()->rol,
