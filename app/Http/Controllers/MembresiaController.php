@@ -39,6 +39,11 @@ class MembresiaController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'id_usuario' => 'required|exists:usuario,id',
+            'id_tipo_membresia' => 'required|exists:tipo_membresia,id',
+        ]);
+
         $user = Auth::user();
         Log::channel('info')->info('Usuario guardó una membresía', [
             'user_id' => $user->id,

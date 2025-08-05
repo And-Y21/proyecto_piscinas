@@ -42,6 +42,12 @@ class TipoMembresiaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|string',
+            'precio' => 'required|numeric',
+            'clases_adquiridas' => 'required|integer',
+        ]);
+
         Log::channel('info')->info('Usuario guardó un tipo de membresía', [
             'user_id' => Auth::id(),
             'rol' => Auth::user()->rol,

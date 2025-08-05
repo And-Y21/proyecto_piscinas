@@ -20,13 +20,13 @@
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="{{$tipoMembresia->nombre}}"
-                                placeholder="Ingrese nombre de la nueva membresía">
+                                placeholder="Ingrese nombre de la nueva membresía" required>
                             <label for="precio">Precio</label>
                             <input type="number" class="form-control" name="precio" id="precio" value="{{$tipoMembresia->precio}}"
-                                placeholder="Ingrese precio de la nueva membresía">
+                                placeholder="Ingrese precio de la nueva membresía" required>
                             <label for="clases_adquiridas">Clases adquiridas</label>
                             <input type="number" class="form-control" name="clases_adquiridas" id="clases_adquiridas" value="{{$tipoMembresia->clases_adquiridas}}"
-                                placeholder="Ingrese clases adquiridas de la nueva membresía">
+                                placeholder="Ingrese clases adquiridas de la nueva membresía" required>
                         </div>
                     </div>
                     <div class="card-footer">

@@ -40,6 +40,13 @@ class AsistenciaController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'id_clase' => 'required|exists:clases,id',
+            'id_usuario' => 'required|exists:users,id',
+            'id_profesor' => 'required|exists:users,id',
+            'id_membresia' => 'required|exists:membresia,id',
+        ]);
+
         $user = Auth::user();
         Log::channel('info')->info('Usuario guardó una asistencia', [
             'user_id' => $user->id,

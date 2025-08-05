@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="usuario">Usuario</label>
-                            <select class="form-control" name="id_usuario" id="id_usuario">
+                            <select class="form-control" name="id_usuario" id="id_usuario" required>
                                 @foreach ($usuarios as $usuario)
                                     <option value="{{$usuario->id}}"
                                         {{$membresia->id_usuario == $usuario->id ? 'selected' : ""}}
@@ -27,7 +27,7 @@
                                 @endforeach
                             </select>
                             <label for="tipo_membresia">Membresia</label>
-                            <select class="form-control" name="id_tipo_membresia" id="id_tipo_membresia">
+                            <select class="form-control" name="id_tipo_membresia" id="id_tipo_membresia" required>
                                 @foreach ($tipos_membresia as $tipo)
                                     <option value="{{$tipo->id}}"
                                         {{$membresia->id_tipo_membresia == $tipo->id ? 'selected' : ""}}

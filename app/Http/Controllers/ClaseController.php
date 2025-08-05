@@ -35,18 +35,18 @@ class ClaseController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'fecha' => 'required|date',
+            'id_usuario' => 'required|exists:users,id',
+            'tipo' => 'required|string',
+            'lugares' => 'required|integer',
+        ]);
+
         $user = Auth::user();
         Log::channel('info')->info('Usuario guardó una clase', [
             'user_id' => $user->id,
             'rol' => $user->rol,
             'clase_data' => $request->all()
-        ]);
-        
-        $request->validate([
-            'fecha' => 'required|date',
-            'id_usuario' => 'required|exists:users,id',
-            'tipo' => 'required|string|max:255',
-            'lugares' => 'required|integer|min:1',
         ]);
 
         if($request->id == 0){

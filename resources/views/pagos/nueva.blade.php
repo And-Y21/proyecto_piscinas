@@ -20,9 +20,9 @@
                         <div class="form-group">
                             <label for="fecha">Fecha</label>
                             <input type="date" class="form-control" name="fecha" id="fecha" value="{{$pago->fecha}}"
-                                placeholder="Ingrese la fecha de pago">
+                                placeholder="Ingrese la fecha de pago" required>
                             <label for="usuario">Usuario</label>
-                            <select class="form-control" name="id_usuario" id="id_usuario">
+                            <select class="form-control" name="id_usuario" id="id_usuario" required>
                                 @foreach ($clientes as $cliente)
                                     <option value="{{$cliente->id}}"
                                         {{$pago->id_usuario == $cliente->id ? 'selected' : ""}}
@@ -30,7 +30,7 @@
                                 @endforeach
                             </select>
                             <label for="membresia">Membresía</label>
-                            <select class="form-control" name="id_membresia" id="id_membresia">
+                            <select class="form-control" name="id_membresia" id="id_membresia" required>
                                 @foreach ($membresias as $membresia)
                                     <option value="{{$membresia->id}}"
                                         {{$pago->id_membresia == $membresia->id ? 'selected' : ""}}
@@ -38,7 +38,7 @@
                                 @endforeach
                             </select>
                             <label for="clase">Clase</label>
-                            <select class="form-control" name="id_clase" id="id_clase">
+                            <select class="form-control" name="id_clase" id="id_clase" required>
                                 @foreach ($clases as $clase)
                                     <option value="{{$clase->id}}"
                                         {{$pago->id_clase == $clase->id ? 'selected' : ""}}
@@ -47,7 +47,7 @@
                             </select>
                             <label for="monto">Monto</label>
                             <input type="number" class="form-control" name="monto" id="monto" value="{{$pago->monto}}"
-                                placeholder="Ingrese el monto del pago">
+                                placeholder="Ingrese el monto del pago" required>
                         </div>
                     </div>
                     <div class="card-footer">
